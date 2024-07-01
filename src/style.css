@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --bg-color:#333333;
+    --clr-green:#99cc00;
+}
+body{
+    background-color: var(--bg-color);
+}
