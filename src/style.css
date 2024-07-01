@@ -7,7 +7,50 @@
 :root{
     --bg-color:#333333;
     --clr-green:#99cc00;
+    --clr-white:#fff;
 }
 body{
+    font-family: "Poppins", sans-serif;;
     background-color: var(--bg-color);
+    color:var(--clr-white);
+}
+header{
+    height: 30vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+header .container{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+header .container div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap:10px
+}
+.number{
+    font-weight: 600;
+    font-size: 30px;
+}
+.minus-sign,.plus-sign{
+    font-size: 30px;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.clock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--clr-green);
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: 10vh;
 }
