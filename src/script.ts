@@ -23,17 +23,35 @@ class TimeMannager {
     increaseBreakTime(){
         this.breakMinutes++;
     }
+    decreaseSessionTime(){
+        this.sessionMinutes--;
+    }
+    decreaseBreakTime(){
+        this.breakMinutes--;
+    }
 };
 const timeMannager:TimeMannager = new TimeMannager(0,25);
 breakPlusSign?.addEventListener('click',(): void =>{
     timeMannager.increaseBreakTime();
     if(breakNumber){
-        breakNumber.textContent = String(timeMannager.breakMinutes)
+        breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 });
 sessionPlusSign?.addEventListener('click',():void =>{
     timeMannager.increaseSessionTime();
     if(sessionNumber){
-        sessionNumber.textContent = String(timeMannager.sessionMinutes)
+        sessionNumber.textContent = String(timeMannager.sessionMinutes);
+    }
+})
+sessionMinusSign?.addEventListener('click',()=>{
+    timeMannager.decreaseSessionTime();
+    if(sessionNumber){
+        sessionNumber.textContent = String(timeMannager.sessionMinutes);
+    }
+})
+breakMinusSign?.addEventListener('click',()=>{
+    timeMannager.decreaseBreakTime();
+    if(breakNumber){
+        breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 })
