@@ -8,23 +8,21 @@
   </head>
   <body>
     <header>
-      <div class="container">
-        <div class="break-length">
-            <span class="plus-sign">+</span>
-            <div class="number">5</div>
-            <span class="minus-sign">-</span>
-          </div>
-          <div class="session-length">
-            <span class="plus-sign">+</span>
-            <div class="number">25</div>
-            <span class="minus-sign">-</span>
-          </div>
+      <div class="break-length" data-role="break-length">
+        <span class="plus-sign" data-action="increase-break">+</span>
+        <div class="number" data-value="break-time">5</div>
+        <span class="minus-sign" data-action="decrease-break">-</span>
+      </div>
+      <div class="session-length" data-role="session-length">
+        <span class="plus-sign" data-action="increase-session">+</span>
+        <div class="number" data-value="session-time">25</div>
+        <span class="minus-sign" data-action="decrease-session">-</span>
       </div>
     </header>
     <main class="container">
-        <div class="clock">
-            <h1>25</h1>
-        </div>
+      <div class="clock" data-role="clock">
+        <h1 data-time="clock">25</h1>
+      </div>
     </main>
   </body>
 </html>
