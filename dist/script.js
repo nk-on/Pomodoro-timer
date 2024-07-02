@@ -17,17 +17,23 @@ class TimeMannager {
         this.sessionMinutes = sessionMinutes;
     }
     increaseSessionTime() {
-        this.breakMinutes++;
+        this.sessionMinutes++;
     }
     increaseBreakTime() {
         this.breakMinutes++;
     }
 }
 ;
-const timeMannager = new TimeMannager(0, 0);
+const timeMannager = new TimeMannager(0, 25);
 breakPlusSign === null || breakPlusSign === void 0 ? void 0 : breakPlusSign.addEventListener('click', () => {
     timeMannager.increaseBreakTime();
     if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);
+    }
+});
+sessionPlusSign === null || sessionPlusSign === void 0 ? void 0 : sessionPlusSign.addEventListener('click', () => {
+    timeMannager.increaseSessionTime();
+    if (sessionNumber) {
+        sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 });

@@ -18,16 +18,22 @@ class TimeMannager {
         this.sessionMinutes = sessionMinutes;
     }
     increaseSessionTime(){
-        this.breakMinutes++;
+        this.sessionMinutes++;
     }
     increaseBreakTime(){
         this.breakMinutes++;
     }
 };
-const timeMannager:TimeMannager = new TimeMannager(0,0);
+const timeMannager:TimeMannager = new TimeMannager(0,25);
 breakPlusSign?.addEventListener('click',(): void =>{
     timeMannager.increaseBreakTime();
     if(breakNumber){
         breakNumber.textContent = String(timeMannager.breakMinutes)
     }
 });
+sessionPlusSign?.addEventListener('click',():void =>{
+    timeMannager.increaseSessionTime();
+    if(sessionNumber){
+        sessionNumber.textContent = String(timeMannager.sessionMinutes)
+    }
+})
