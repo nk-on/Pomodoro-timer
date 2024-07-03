@@ -30,15 +30,14 @@ class TimeMannager {
     }
 }
 ;
-const timeMannager = new TimeMannager(0, 25);
+const timeMannager = new TimeMannager(5, 25);
 breakPlusSign === null || breakPlusSign === void 0 ? void 0 : breakPlusSign.addEventListener('click', () => {
-    if (timeMannager.breakMinutes > 5) {
-        timeMannager.decreaseBreakTime();
+    if (timeMannager.breakMinutes < 5) {
+        timeMannager.increaseBreakTime();
     }
     else {
         return;
     }
-    timeMannager.increaseBreakTime();
     if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);
     }
@@ -54,8 +53,20 @@ sessionPlusSign === null || sessionPlusSign === void 0 ? void 0 : sessionPlusSig
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 });
+breakMinusSign === null || breakMinusSign === void 0 ? void 0 : breakMinusSign.addEventListener('click', () => {
+    if (timeMannager.breakMinutes > 0) {
+        console.log('i work');
+        timeMannager.decreaseBreakTime();
+    }
+    else {
+        return;
+    }
+    if (breakNumber) {
+        breakNumber.textContent = String(timeMannager.breakMinutes);
+    }
+});
 sessionMinusSign === null || sessionMinusSign === void 0 ? void 0 : sessionMinusSign.addEventListener('click', () => {
-    if (timeMannager.sessionMinutes > 0) {
+    if (timeMannager.sessionMinutes < 0) {
         timeMannager.decreaseSessionTime();
     }
     else {
@@ -63,17 +74,5 @@ sessionMinusSign === null || sessionMinusSign === void 0 ? void 0 : sessionMinus
     }
     if (sessionNumber) {
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
-    }
-});
-breakMinusSign === null || breakMinusSign === void 0 ? void 0 : breakMinusSign.addEventListener('click', () => {
-    if (timeMannager.breakMinutes >= 0) {
-        timeMannager.decreaseBreakTime();
-    }
-    else {
-        return;
-    }
-    timeMannager.decreaseBreakTime();
-    if (breakNumber) {
-        breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 });

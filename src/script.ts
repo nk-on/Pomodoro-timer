@@ -30,9 +30,9 @@ class TimeMannager {
         this.breakMinutes--;
     }
 };
-const timeMannager: TimeMannager = new TimeMannager(0, 25);
+const timeMannager: TimeMannager = new TimeMannager(5, 25);
 breakPlusSign?.addEventListener('click', (): void => {
-    if (timeMannager.breakMinutes > 5) {
+    if (timeMannager.breakMinutes < 5) {
         timeMannager.increaseBreakTime();
     } else {
         return;
@@ -53,17 +53,17 @@ sessionPlusSign?.addEventListener('click', (): void => {
 })
 breakMinusSign?.addEventListener('click', () => {
     if (timeMannager.breakMinutes > 0) {
+        console.log('i work')
         timeMannager.decreaseBreakTime();
     } else {
         return;
     }
-    timeMannager.decreaseBreakTime();
     if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 });
 sessionMinusSign?.addEventListener('click', () => {
-    if (timeMannager.sessionMinutes > 0) {
+    if (timeMannager.sessionMinutes < 0) {
         timeMannager.decreaseSessionTime();
     } else {
         return;
