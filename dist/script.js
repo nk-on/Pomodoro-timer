@@ -32,24 +32,46 @@ class TimeMannager {
 ;
 const timeMannager = new TimeMannager(0, 25);
 breakPlusSign === null || breakPlusSign === void 0 ? void 0 : breakPlusSign.addEventListener('click', () => {
+    if (timeMannager.breakMinutes > 5) {
+        timeMannager.decreaseBreakTime();
+    }
+    else {
+        return;
+    }
     timeMannager.increaseBreakTime();
     if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 });
 sessionPlusSign === null || sessionPlusSign === void 0 ? void 0 : sessionPlusSign.addEventListener('click', () => {
-    timeMannager.increaseSessionTime();
+    if (timeMannager.sessionMinutes < 25) {
+        timeMannager.increaseSessionTime();
+    }
+    else {
+        return;
+    }
     if (sessionNumber) {
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 });
 sessionMinusSign === null || sessionMinusSign === void 0 ? void 0 : sessionMinusSign.addEventListener('click', () => {
-    timeMannager.decreaseSessionTime();
+    if (timeMannager.sessionMinutes > 0) {
+        timeMannager.decreaseSessionTime();
+    }
+    else {
+        return;
+    }
     if (sessionNumber) {
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 });
 breakMinusSign === null || breakMinusSign === void 0 ? void 0 : breakMinusSign.addEventListener('click', () => {
+    if (timeMannager.breakMinutes >= 0) {
+        timeMannager.decreaseBreakTime();
+    }
+    else {
+        return;
+    }
     timeMannager.decreaseBreakTime();
     if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);

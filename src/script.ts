@@ -2,7 +2,7 @@ const breakLengthContainer = document.querySelector<HTMLDivElement>('[data-role=
 const sessionLengthContainer = document.querySelector<HTMLDivElement>('[data-role="session-length"]');
 const clockElement = document.querySelector<HTMLDivElement>('[data-role="clock"]');
 const breakPlusSign = document.querySelector<HTMLSpanElement>('[data-action="increase-break"]');
-const breakNumber =  document.querySelector<HTMLDivElement>('[data-value="break-time"]');
+const breakNumber = document.querySelector<HTMLDivElement>('[data-value="break-time"]');
 const breakMinusSign = document.querySelector<HTMLSpanElement>('[data-action="decrease-break"]');
 const sessionPlusSign = document.querySelector<HTMLSpanElement>('[data-action="increase-session"]');
 const sessionNumber = document.querySelector<HTMLDivElement>('[data-value="session-time"]');
@@ -17,41 +17,58 @@ class TimeMannager {
         this.breakMinutes = breakMinutes;
         this.sessionMinutes = sessionMinutes;
     }
-    increaseSessionTime(){
+    increaseSessionTime() {
         this.sessionMinutes++;
     }
-    increaseBreakTime(){
+    increaseBreakTime() {
         this.breakMinutes++;
     }
-    decreaseSessionTime(){
+    decreaseSessionTime() {
         this.sessionMinutes--;
     }
-    decreaseBreakTime(){
+    decreaseBreakTime() {
         this.breakMinutes--;
     }
 };
-const timeMannager:TimeMannager = new TimeMannager(0,25);
-breakPlusSign?.addEventListener('click',(): void =>{
-    timeMannager.increaseBreakTime();
-    if(breakNumber){
+const timeMannager: TimeMannager = new TimeMannager(0, 25);
+breakPlusSign?.addEventListener('click', (): void => {
+    if (timeMannager.breakMinutes > 5) {
+        timeMannager.increaseBreakTime();
+    } else {
+        return;
+    }
+    if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 });
-sessionPlusSign?.addEventListener('click',():void =>{
-    timeMannager.increaseSessionTime();
-    if(sessionNumber){
+sessionPlusSign?.addEventListener('click', (): void => {
+    if (timeMannager.sessionMinutes < 25) {
+        timeMannager.increaseSessionTime();
+    } else {
+        return;
+    }
+    if (sessionNumber) {
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 })
-sessionMinusSign?.addEventListener('click',()=>{
-    timeMannager.decreaseSessionTime();
-    if(sessionNumber){
-        sessionNumber.textContent = String(timeMannager.sessionMinutes);
+breakMinusSign?.addEventListener('click', () => {
+    if (timeMannager.breakMinutes > 0) {
+        timeMannager.decreaseBreakTime();
+    } else {
+        return;
     }
-})
-breakMinusSign?.addEventListener('click',()=>{
     timeMannager.decreaseBreakTime();
-    if(breakNumber){
+    if (breakNumber) {
         breakNumber.textContent = String(timeMannager.breakMinutes);
+    }
+});
+sessionMinusSign?.addEventListener('click', () => {
+    if (timeMannager.sessionMinutes > 0) {
+        timeMannager.decreaseSessionTime();
+    } else {
+        return;
+    }
+    if (sessionNumber) {
+        sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 })
