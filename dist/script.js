@@ -97,6 +97,10 @@ function countTime() {
             secondsContainer.textContent = String(seconds);
         }
         ;
+        if (timeMannager.sessionMinutes === 0 && seconds === 0) {
+            clearInterval(interval);
+        }
+        ;
     };
 }
 function startTimer() {
