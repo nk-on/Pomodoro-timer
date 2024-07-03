@@ -7,7 +7,10 @@ const breakMinusSign = document.querySelector<HTMLSpanElement>('[data-action="de
 const sessionPlusSign = document.querySelector<HTMLSpanElement>('[data-action="increase-session"]');
 const sessionNumber = document.querySelector<HTMLDivElement>('[data-value="session-time"]');
 const sessionMinusSign = document.querySelector<HTMLSpanElement>('[data-action="decrease-session"]');
+const clockContainer = document.querySelector<HTMLDivElement>('[data-role="clock"]')
 const clockTime = document.querySelector<HTMLHeadingElement>('[data-time="clock"]');
+const minutesContainer = document.querySelector<HTMLSpanElement>('[data-minutes]');
+const secondsContainer = document.querySelector<HTMLSpanElement>('[data-seconds]');
 //user should be able to increase session length of decrease it (from 1 to 25)
 //when they click start time should pass in reverse
 class TimeMannager {
@@ -31,6 +34,7 @@ class TimeMannager {
     }
 };
 const timeMannager: TimeMannager = new TimeMannager(5, 25);
+let interval:number;
 breakPlusSign?.addEventListener('click', (): void => {
     if (timeMannager.breakMinutes < 5) {
         timeMannager.increaseBreakTime();
@@ -63,7 +67,7 @@ breakMinusSign?.addEventListener('click', () => {
     }
 });
 sessionMinusSign?.addEventListener('click', () => {
-    if (timeMannager.sessionMinutes < 0) {
+    if (timeMannager.sessionMinutes > 0) {
         timeMannager.decreaseSessionTime();
     } else {
         return;
@@ -71,4 +75,27 @@ sessionMinusSign?.addEventListener('click', () => {
     if (sessionNumber) {
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
-})
+});
+function countTime():()=>void {
+    let seconds: number = 60;
+    return ():void=>{
+        if (seconds === 0) {
+            timeMannager.decreaseSessionTime();
+            seconds = 60;
+        };
+        if (minutesContainer) {
+            minutesContainer.textContent = `${String(timeMannager.sessionMinutes)}:`;
+        };
+        if (secondsContainer) {
+            seconds--;
+            secondsContainer.textContent = String(seconds)
+        };
+    }
+}
+function startTimer(): void {
+    //it should grab session length and run decrease length method untill it reacher 0 in every second 
+    timeMannager.decreaseSessionTime();
+    const countTimeFun = countTime();
+    interval = setInterval(countTimeFun,1000);
+};
+clockContainer?.addEventListener('click', startTimer);
