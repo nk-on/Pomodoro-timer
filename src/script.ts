@@ -84,6 +84,8 @@ function switchMode():void{
     if(modePlaceHolder){
         modePlaceHolder.textContent = mode;
     }
+    timeMannager.sessionMinutes = Number(breakNumber?.textContent); 
+    timeMannager.breakMinutes = Number(breakNumber?.textContent);
 }
 function countTime():()=>void {
     let seconds: number = 60;
