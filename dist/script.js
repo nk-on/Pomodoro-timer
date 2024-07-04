@@ -12,6 +12,9 @@ const clockContainer = document.querySelector('[data-role="clock"]');
 const clockTime = document.querySelector('[data-time="clock"]');
 const minutesContainer = document.querySelector('[data-minutes]');
 const secondsContainer = document.querySelector('[data-seconds]');
+const switchButton = document.querySelector('[data-switchButton]');
+const modePlaceHolder = document.querySelector('[data-mode]');
+let mode = "session";
 //user should be able to increase session length of decrease it (from 1 to 25)
 //when they click start time should pass in reverse
 class TimeMannager {
@@ -59,7 +62,6 @@ sessionPlusSign === null || sessionPlusSign === void 0 ? void 0 : sessionPlusSig
 });
 breakMinusSign === null || breakMinusSign === void 0 ? void 0 : breakMinusSign.addEventListener('click', () => {
     if (timeMannager.breakMinutes > 0) {
-        console.log('i work');
         timeMannager.decreaseBreakTime();
     }
     else {
@@ -80,16 +82,23 @@ sessionMinusSign === null || sessionMinusSign === void 0 ? void 0 : sessionMinus
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 });
+function switchMode() {
+    //create global variable which will either hold break mode or session  mode 
+    mode = mode === 'session' ? 'break' : 'session';
+    if (modePlaceHolder) {
+        modePlaceHolder.textContent = mode;
+    }
+}
 function countTime() {
     let seconds = 60;
     return () => {
         if (seconds === 0) {
-            timeMannager.decreaseSessionTime();
+            mode === 'session' ? timeMannager.decreaseSessionTime() : timeMannager.decreaseBreakTime();
             seconds = 60;
         }
         ;
         if (minutesContainer) {
-            minutesContainer.textContent = `${String(timeMannager.sessionMinutes)}:`;
+            minutesContainer.textContent = mode === 'session' ? `${String(timeMannager.sessionMinutes)}:` : `${String(timeMannager.breakMinutes)}`;
         }
         ;
         if (secondsContainer) {
@@ -99,15 +108,16 @@ function countTime() {
         ;
         if (timeMannager.sessionMinutes === 0 && seconds === 0) {
             clearInterval(interval);
+            switchMode();
         }
         ;
     };
 }
 function startTimer() {
     //it should grab session length and run decrease length method untill it reacher 0 in every second 
-    timeMannager.decreaseSessionTime();
+    mode === 'session' ? timeMannager.decreaseSessionTime() : timeMannager.decreaseBreakTime();
     const countTimeFun = countTime();
     interval = setInterval(countTimeFun, 1000);
 }
 ;
-clockContainer === null || clockContainer === void 0 ? void 0 : clockContainer.addEventListener('click', startTimer);
+switchButton === null || switchButton === void 0 ? void 0 : switchButton.addEventListener('click', startTimer);

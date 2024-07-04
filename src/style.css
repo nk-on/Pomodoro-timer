@@ -47,8 +47,10 @@ header .container div{
 }
 .container{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap:10px;
 }
 .clock{
     display: flex;
@@ -59,4 +61,9 @@ header .container div{
     width: 200px;
     height: 200px;
     margin-top: 10vh;
+}
+.switch-button{
+    border: none;
+    background-color: var(--clr-green);
+    padding: 15px;
 }
