@@ -108,7 +108,7 @@ function countTime() {
             secondsContainer.textContent = String(seconds);
         }
         ;
-        if (timeMannager.sessionMinutes === 0 && seconds === 0) {
+        if ((timeMannager.sessionMinutes === 0 || timeMannager.breakMinutes === 0) && seconds === 0) {
             clearInterval(interval);
             switchMode();
         }
