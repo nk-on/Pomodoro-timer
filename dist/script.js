@@ -100,7 +100,7 @@ function countTime() {
         }
         ;
         if (minutesContainer) {
-            minutesContainer.textContent = mode === 'session' ? `${String(timeMannager.sessionMinutes)}:` : `${String(timeMannager.breakMinutes)}`;
+            minutesContainer.textContent = mode === 'session' ? `${String(timeMannager.sessionMinutes)}:` : `${String(timeMannager.breakMinutes)}:`;
         }
         ;
         if (secondsContainer) {
