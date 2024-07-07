@@ -12,13 +12,11 @@ const clockContainer = document.querySelector('[data-role="clock"]');
 const clockTime = document.querySelector('[data-time="clock"]');
 const minutesContainer = document.querySelector('[data-minutes]');
 const secondsContainer = document.querySelector('[data-seconds]');
-const switchButton = document.querySelector('[data-switchButton]');
+const startButton = document.querySelector('[data-start]');
 const modePlaceHolder = document.querySelector('[data-mode]');
 const pauseButton = document.querySelector('[data-pause]');
 const alarm = document.querySelector('#my-audio');
 let mode = "session";
-//user should be able to increase session length of decrease it (from 1 to 25)
-//when they click start time should pass in reverse
 class TimeMannager {
     constructor(breakMinutes, sessionMinutes) {
         this.breakMinutes = breakMinutes;
@@ -93,6 +91,9 @@ function switchMode() {
     alarm === null || alarm === void 0 ? void 0 : alarm.play();
     timeMannager.sessionMinutes = Number(breakNumber === null || breakNumber === void 0 ? void 0 : breakNumber.textContent);
     timeMannager.breakMinutes = Number(breakNumber === null || breakNumber === void 0 ? void 0 : breakNumber.textContent);
+    if (startButton) {
+        startButton.disabled = false;
+    }
 }
 function countTime() {
     let seconds = 0;
@@ -122,10 +123,14 @@ function countTime() {
 const countTimeFun = countTime();
 function startTimer() {
     alarm === null || alarm === void 0 ? void 0 : alarm.pause();
+    if (startButton) {
+        startButton.disabled = true;
+    }
+    ;
     interval = setInterval(countTimeFun, 1000);
 }
 ;
 pauseButton === null || pauseButton === void 0 ? void 0 : pauseButton.addEventListener('click', () => {
     clearInterval(interval);
 });
-switchButton === null || switchButton === void 0 ? void 0 : switchButton.addEventListener('click', startTimer);
+startButton === null || startButton === void 0 ? void 0 : startButton.addEventListener('click', startTimer);
