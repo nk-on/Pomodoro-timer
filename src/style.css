@@ -66,4 +66,5 @@ header .container div{
     border: none;
     background-color: var(--clr-green);
     padding: 15px;
+    cursor: pointer;
 }
