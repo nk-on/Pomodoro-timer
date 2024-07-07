@@ -13,6 +13,7 @@ const minutesContainer = document.querySelector<HTMLSpanElement>('[data-minutes]
 const secondsContainer = document.querySelector<HTMLSpanElement>('[data-seconds]');
 const switchButton = document.querySelector<HTMLButtonElement>('[data-switchButton]');
 const modePlaceHolder = document.querySelector<HTMLSpanElement>('[data-mode]');
+const pauseButton = document.querySelector<HTMLButtonElement>('[data-pause]');
 let mode:string = "session";
 //user should be able to increase session length of decrease it (from 1 to 25)
 //when they click start time should pass in reverse
@@ -88,7 +89,7 @@ function switchMode():void{
     timeMannager.breakMinutes = Number(breakNumber?.textContent);
 }
 function countTime():()=>void {
-    let seconds: number = 60;
+    let seconds: number = 0;
     return ():void=>{
         if (seconds === 0) {
             mode === 'session' ? timeMannager.decreaseSessionTime() : timeMannager.decreaseBreakTime();
@@ -106,11 +107,12 @@ function countTime():()=>void {
             switchMode();
         };
     }
-}
+};
+const countTimeFun = countTime();
 function startTimer(): void {
-    //it should grab session length and run decrease length method untill it reacher 0 in every second 
-    mode === 'session' ? timeMannager.decreaseSessionTime() : timeMannager.decreaseBreakTime();
-    const countTimeFun = countTime();
     interval = setInterval(countTimeFun,1000);
 };
+pauseButton?.addEventListener('click',()=>{
+    clearInterval(interval);
+})
 switchButton?.addEventListener('click', startTimer);
