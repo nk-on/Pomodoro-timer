@@ -119,8 +119,6 @@ function countTime() {
 ;
 const countTimeFun = countTime();
 function startTimer() {
-    //it should grab session length and run decrease length method untill it reacher 0 in every second 
-    // mode === 'session' ? timeMannager.decreaseSessionTime() : timeMannager.decreaseBreakTime();
     interval = setInterval(countTimeFun, 1000);
 }
 ;

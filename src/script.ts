@@ -59,7 +59,7 @@ sessionPlusSign?.addEventListener('click', (): void => {
         sessionNumber.textContent = String(timeMannager.sessionMinutes);
     }
 })
-breakMinusSign?.addEventListener('click', () => {
+breakMinusSign?.addEventListener('click', ():void => {
     if (timeMannager.breakMinutes > 0) {
         timeMannager.decreaseBreakTime();
     } else {
@@ -69,7 +69,7 @@ breakMinusSign?.addEventListener('click', () => {
         breakNumber.textContent = String(timeMannager.breakMinutes);
     }
 });
-sessionMinusSign?.addEventListener('click', () => {
+sessionMinusSign?.addEventListener('click', ():void => {
     if (timeMannager.sessionMinutes > 0) {
         timeMannager.decreaseSessionTime();
     } else {
@@ -112,7 +112,7 @@ const countTimeFun = countTime();
 function startTimer(): void {
     interval = setInterval(countTimeFun,1000);
 };
-pauseButton?.addEventListener('click',()=>{
+pauseButton?.addEventListener('click',():void=>{
     clearInterval(interval);
 })
 switchButton?.addEventListener('click', startTimer);
